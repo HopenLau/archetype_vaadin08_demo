@@ -2,10 +2,16 @@ package com.mytest;
 
 import javax.servlet.annotation.WebServlet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.server.VaadinSession;
+import com.vaadin.server.WrappedSession;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
@@ -23,9 +29,16 @@ import com.vaadin.ui.VerticalLayout;
  */
 @Theme("mytheme")
 public class MyUI extends UI {
+	private Logger log = LoggerFactory.getLogger(MyUI.class);
 
 	@Override
 	protected void init(VaadinRequest vaadinRequest) {
+		VaadinSession a = UI.getCurrent().getSession();
+		VaadinRequest b = VaadinService.getCurrentRequest();
+		log.info(b.getParameter("pa"));
+		log.info(b.getParameter("pb"));
+		WrappedSession aa = UI.getCurrent().getSession().getSession();
+
 		final VerticalLayout layout = new VerticalLayout();
 
 		final TextField name = new TextField();
